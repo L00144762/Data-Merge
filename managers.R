@@ -71,4 +71,5 @@ names(managers)[11] <- "Answer total"
 #Show 
 str(managers)
 
-read.csv("MoreData.csv")
+new_managers_data <- read.csv("MoreData.csv")
+
