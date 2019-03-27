@@ -1,3 +1,7 @@
+
+
+
+
 # Enter data into vectors before constructing the data frame
 date_col <- c("2018-15-10", "2018-01-11", "2018-21-10", "2018-28-10", "2018-01-05")
 country_col <- c("US", "US", "IRL", "IRL", "IRL")
@@ -63,7 +67,7 @@ managers <- data.frame(managers, mean_value)
 managers
 
 # Change the name of this column to "mean value"
-names(managers)[11] <- "mean value"
+names(managers)[12] <- "mean value"
 
 # Change name of summary_col to "Answer total"
 names(managers)[11] <- "Answer total"
@@ -72,4 +76,17 @@ names(managers)[11] <- "Answer total"
 str(managers)
 
 new_managers_data <- read.csv("MoreData.csv")
+new_managers_data
+head(new_managers_data)
+
+search()
+
+rbind(managers, new_managers_data)
+attach(new_managers_data)
+new_
+converted_date <- as.Date(Date, format= "%m/d/%Y")
+str(new_managers_data)
+converted_date <- format(converted_date, "%d/%m/%Y")
+
+converted_date
 
