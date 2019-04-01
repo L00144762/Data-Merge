@@ -81,12 +81,90 @@ head(new_managers_data)
 
 search()
 
-rbind(managers, new_managers_data)
-attach(new_managers_data)
-new_
-converted_date <- as.Date(Date, format= "%m/d/%Y")
-str(new_managers_data)
-converted_date <- format(converted_date, "%d/%m/%Y")
+#rbind(managers, new_managers_data)
+#attach(new_managers_data)
+#converted_date <- as.Date(Date, format= "%m/d/%Y")
+#str(new_managers_data)
+#converted_date <- format(converted_date, "%d/%m/%Y")
 
-converted_date
+#converted_date
+managers$Date
+converted_date <- as.Date(managers$Date, "%Y-%d-%m")
+managers$Date = converted_date
+managers$Date
+
+str(managers)
+str(new_managers_data)
+new_managers_data$Date
+converted_date_new_managers <- as.Date(
+  new_managers_data$Date, "%Y-%d-%m")
+new_managers_data$Date = converted_date_new_managers
+new_managers_data$Date
+
+# Select records within 15-10-18 and 01-11-18
+startdate <- as.Date("2018-10-15")
+enddate <- as.Date("2018-11-01")
+new_data <- managers[managers$Date >= startdate & managers$Date <= enddate,]
+new_data
+str(managers)
+
+# Dropping attributes from data
+# This command shows all attributes where Q3 or Q4 are contained
+# The ! operator reverses this choice
+include_list <- names(managers) %in% c("Q3", "Q4")
+include_list
+
+
+# This list can then be used to extract this data
+new_data <- managers[(include_list)]
+# or
+new_data <- managers[names(managers) %in% c("Q3", "Q4")]
+# Show contents
+new_data
+
+# Here's an alternative method (count starts at 0)
+# This keeps everything apart from the 2 values
+new_data <- managers[c(-6, -7, -8, -9)]
+new_data
+
+# Using the subset function
+# to extract all records from managers where age > 35 or age < 24. 
+# Only select the listed attributes
+attach(managers)
+new_data <- subset(managers, Age >= 35 | Age < 24, select = c(Q1, Q2, Q3, Q4))
+new_data
+
+# Select a subset of managers
+# where gender = M and age > 25. Only show records 
+# from Gender to Q4 includive
+new_data <- subset(managers, Gender == "M" & Age > 25, select = Gender:Q4)
+new_data
+
+# Try this out ....
+new_managers <- subset(managers, Gender == "M" & Age > 25)
+new_managers
+detach(managers)
+
+
+# Random sampling --------------------------------------------------------
+# Selecting a random sample from managers
+my_sample <- managers[sample(1:nrow(managers), 3, replace = FALSE),]
+my_sample
+
+# Extracting 10 random samples from managers
+# Adds number to represent no of iterations taken from that record
+my_sample <- managers[sample(1:nrow(managers), 10, replace = TRUE),]
+my_sample
+
+# Sorting data ------------------------------------------------------------
+#Sorting data by age
+attach(managers)
+new_data <- managers[order(Age),]
+new_data
+
+# Sort by Gender and then age within each gender
+str(Age)
+str(Gender)
+new_data <- managers[order(Gender, Age),]
+new_data
 
